@@ -1,5 +1,7 @@
 # VS Templater
 
+[راهنمای فارسی استفاده، مثال‌ها و رفع مشکل](docs/user-guide.fa.md)
+
 Save independent copies of project files and folders in named template groups. Import a group into another local project, preserving saved paths or choosing a new destination. Templates persist outside the workspace in VS Code's extension global storage.
 
 ## Install and try
