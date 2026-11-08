@@ -1,0 +1,180 @@
+{
+  "name": "vstemplater",
+  "displayName": "VS Templater",
+  "description": "Save project files as reusable template groups and import them with their original or a new path.",
+  "version": "0.5.2",
+  "publisher": "vstemplater-local",
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onFileSystem:vstemplater",
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "tsc -p jsconfig.json",
+    "package": "vsce package --allow-missing-repository --skip-license"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "~1.96.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.7.0"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "vstemplater.add",
+        "title": "Add to Templates",
+        "category": "Templates"
+      },
+      {
+        "command": "vstemplater.import",
+        "title": "Import from Template",
+        "category": "Templates"
+      },
+      {
+        "command": "vstemplater.importItem",
+        "title": "Import into Project",
+        "category": "Templates",
+        "icon": "$(export)"
+      },
+      {
+        "command": "vstemplater.rename",
+        "title": "Rename",
+        "category": "Templates"
+      },
+      {
+        "command": "vstemplater.delete",
+        "title": "Delete",
+        "category": "Templates"
+      },
+      {
+        "command": "vstemplater.edit",
+        "title": "Edit Template File",
+        "category": "Templates"
+      },
+      {
+        "command": "vstemplater.refresh",
+        "title": "Refresh Templates",
+        "category": "Templates",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vstemplater.connect",
+        "title": "Connect GitHub Sync",
+        "category": "Templates",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "vstemplater.sync",
+        "title": "Sync Now",
+        "category": "Templates",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "vstemplater.disconnect",
+        "title": "Disconnect GitHub Sync",
+        "category": "Templates",
+        "icon": "$(sync)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "vstemplater.templates",
+          "name": "Templates"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "vstemplater.templates",
+        "contents": "No templates yet. Right-click a project file or folder and select Add to Templates.\n[Add to Templates](command:vstemplater.add)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "vstemplater.refresh",
+          "when": "view == vstemplater.templates",
+          "group": "navigation"
+        },
+        {
+          "command": "vstemplater.sync",
+          "when": "view == vstemplater.templates",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "vstemplater.importItem",
+          "when": "view == vstemplater.templates",
+          "group": "templates@1"
+        },
+        {
+          "command": "vstemplater.edit",
+          "when": "view == vstemplater.templates && viewItem == templateFile",
+          "group": "templates@2"
+        },
+        {
+          "command": "vstemplater.rename",
+          "when": "view == vstemplater.templates",
+          "group": "templates@3"
+        },
+        {
+          "command": "vstemplater.delete",
+          "when": "view == vstemplater.templates",
+          "group": "templates@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "vstemplater.importItem",
+          "when": "false"
+        },
+        {
+          "command": "vstemplater.rename",
+          "when": "false"
+        },
+        {
+          "command": "vstemplater.delete",
+          "when": "false"
+        },
+        {
+          "command": "vstemplater.edit",
+          "when": "false"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "vstemplater.add",
+          "when": "resourceScheme == file",
+          "group": "templates@1"
+        },
+        {
+          "command": "vstemplater.import",
+          "when": "resourceScheme == file",
+          "group": "templates@2"
+        }
+      ]
+    }
+  }
+}

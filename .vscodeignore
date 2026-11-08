@@ -1,0 +1,10 @@
+node_modules/**
+test/**
+.vscode/**
+.codebase-memory/**
+jsconfig.json
+package-lock.json
+docs/**
+*.vsix
+
+.recovery/**
